@@ -1,0 +1,120 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+parsing domain file "domain.pddl" done successfully
+parsing problem file "p01.pddl" done successfully
+# WARNING: Unable to get Instrumentation. Dynamic Attach failed. You may add this JAR as -javaagent manually, or supply -Djdk.attach.allowAttachSelf
+# WARNING: Unable to attach Serviceability Agent. You can try again with escalated privileges. Two options: a) use -Djol.tryWithSudo=true to try with sudo; b) echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+
+problem instantiation done successfully (90 actions, 46 fluents)
+
+* Starting A* search y 
+* A* search succeeded
+
+found plan as follows:
+
+00: (  drive truck0 distributor1 distributor0) [0]
+01: ( lift hoist1 crate0 pallet1 distributor0) [0]
+02: (       lift hoist0 crate1 pallet0 depot0) [0]
+03: (  drive truck0 distributor0 distributor0) [0]
+04: (        load hoist0 crate1 truck1 depot0) [0]
+05: (        drive truck1 depot0 distributor0) [0]
+06: (  drive truck0 distributor0 distributor0) [0]
+07: (  load hoist1 crate0 truck0 distributor0) [0]
+08: (  drive truck0 distributor0 distributor1) [0]
+09: (  drive truck1 distributor0 distributor0) [0]
+10: (unload hoist2 crate0 truck0 distributor1) [0]
+11: (        drive truck0 distributor1 depot0) [0]
+12: (unload hoist1 crate1 truck1 distributor0) [0]
+13: (        drive truck0 depot0 distributor0) [0]
+14: (  drive truck0 distributor0 distributor0) [0]
+15: ( drop hoist1 crate1 pallet1 distributor0) [0]
+16: ( drop hoist2 crate0 pallet2 distributor1) [0]
+
+time spent:       0,02 seconds parsing 
+                  0,03 seconds encoding 
+                  0,00 seconds searching
+                  0,04 seconds total time
+
+memory used:      0,26 MBytes for problem representation
+                  0,00 MBytes for searching
+                  0,26 MBytes total
+
+
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+parsing domain file "domain.pddl" done successfully
+parsing problem file "p02.pddl" done successfully
+# WARNING: Unable to get Instrumentation. Dynamic Attach failed. You may add this JAR as -javaagent manually, or supply -Djdk.attach.allowAttachSelf
+# WARNING: Unable to attach Serviceability Agent. You can try again with escalated privileges. Two options: a) use -Djol.tryWithSudo=true to try with sudo; b) echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+
+problem instantiation done successfully (210 actions, 82 fluents)
+
+* Starting A* search y 
+* A* search succeeded
+
+found plan as follows:
+
+00: (  lift hoist2 crate2 crate1 distributor1) [0]
+01: (       lift hoist0 crate0 pallet0 depot0) [0]
+02: (        load hoist0 crate0 truck0 depot0) [0]
+03: (        drive truck0 depot0 distributor1) [0]
+04: (  load hoist2 crate2 truck0 distributor1) [0]
+05: (  drive truck0 distributor1 distributor0) [0]
+06: (  drive truck0 distributor0 distributor0) [0]
+07: (        drive truck1 depot0 distributor0) [0]
+08: (  drive truck1 distributor0 distributor0) [0]
+09: (  drive truck1 distributor0 distributor0) [0]
+10: ( lift hoist2 crate1 pallet2 distributor1) [0]
+11: (  drive truck0 distributor0 distributor1) [0]
+12: (  load hoist2 crate1 truck0 distributor1) [0]
+13: (  drive truck0 distributor1 distributor0) [0]
+14: (  drive truck0 distributor0 distributor0) [0]
+15: (unload hoist1 crate1 truck0 distributor0) [0]
+16: (        drive truck0 distributor0 depot0) [0]
+17: (  drive truck1 distributor0 distributor0) [0]
+18: (      unload hoist0 crate2 truck0 depot0) [0]
+19: (  drive truck1 distributor0 distributor0) [0]
+20: (              drive truck0 depot0 depot0) [0]
+21: (  drop hoist1 crate1 crate3 distributor0) [0]
+22: (        drive truck0 depot0 distributor1) [0]
+23: (       drop hoist0 crate2 pallet0 depot0) [0]
+24: (unload hoist2 crate0 truck0 distributor1) [0]
+25: ( drop hoist2 crate0 pallet2 distributor1) [0]
+
+time spent:       0,02 seconds parsing 
+                  0,04 seconds encoding 
+                  0,00 seconds searching
+                  0,06 seconds total time
+
+memory used:      0,56 MBytes for problem representation
+                  0,00 MBytes for searching
+                  0,56 MBytes total
+
+
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+parsing domain file "domain.pddl" done successfully
+parsing problem file "p03.pddl" done successfully
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+
+parsing domain file "domain.pddl" done successfully
+parsing problem file "p05.pddl" done successfully
+p05.pddl timed out temps = 5 minutes
+p06.pddl timed out temps = 5 minutes
+p07.pddl timed out temps = 5 minutes
+p08.pddl timed out temps = 5 minutes
+p09.pddl timed out temps = 5 minutes
+p10.pddl timed out temps = 5 minutes
+p11.pddl timed out temps = 5 minutes
+p12.pddl timed out temps = 5 minutes
+p13.pddl timed out temps = 5 minutes
+p14.pddl timed out temps = 5 minutes
+p15.pddl timed out temps = 5 minutes
+p16.pddl timed out temps = 5 minutes
+p17.pddl timed out temps = 5 minutes
+p18.pddl timed out temps = 5 minutes
+p19.pddl timed out temps = 5 minutes
+p20.pddl timed out temps = 5 minutes
+p21.pddl timed out temps = 5 minutes
+p22.pddl timed out temps = 5 minutes

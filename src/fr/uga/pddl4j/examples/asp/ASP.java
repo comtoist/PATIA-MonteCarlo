@@ -66,6 +66,7 @@ public class ASP extends AbstractPlanner<ADLProblem> {
     private int NUM_WALK = 2000;
     private int LENGTH_WALK = 10;
     private final int MAX_STEPS = 7;
+    private double alpha = 0.9;
 
     /*
      * The class logger.
@@ -162,7 +163,7 @@ public class ASP extends AbstractPlanner<ADLProblem> {
         // Creates the A* search strategy
         StateSpaceSearch search = StateSpaceSearch.getInstance(SearchStrategy.Name.ASTAR,
             this.getHeuristic(), this.getHeuristicWeight(), this.getTimeout());
-        LOGGER.info("* Starting Arvand Static search y \n");
+        LOGGER.info("* Starting A* search y \n");
 
         // Search a solution
         Plan plan =MonteCarlo(problem);
@@ -183,18 +184,26 @@ public class ASP extends AbstractPlanner<ADLProblem> {
     public Plan MonteCarlo(final ADLProblem problem){
         Plan plan = null;
         State init = new State(problem.getInitialState());
-
+     
         // Instance de l'heuristique
         StateHeuristic heuristic = StateHeuristic.getInstance(this.getHeuristic(), problem);
         Node s = new Node(init, null, -1, 0, heuristic.estimate(init, problem.getGoal()));
         Condition goal = problem.getGoal();
         double hmin = heuristic.estimate(s,goal);
         int counter = 0;
+        //RANDOM WALK LENGTH DYNAMIQUE
+        int hmincount = 0;
+        double prevHmin = hmin;
+        //NUMBER OF RANDOM WALK DYNAMIQUE
+        boolean acceptable_progress = true;
 
         while(!s.satisfy(goal)){
             Node dead = new Node(s);
             if(counter > MAX_STEPS || s == dead){
                 s = new Node(init, null, -1, 0, heuristic.estimate(init, problem.getGoal()));
+                counter = 0;
+                hmincount = 0;
+                prevHmin = hmin;
             }
             
             s = MonteCarloRandomWalk(s,problem);
@@ -205,12 +214,24 @@ public class ASP extends AbstractPlanner<ADLProblem> {
             else{
                 counter++;
             }
+
+            if(prevHmin == hmin){
+                hmincount++;
+            }else{
+                prevHmin = hmin;
+            }
+            
+            if(hmincount==5){
+                hmincount = 0;
+                LENGTH_WALK = LENGTH_WALK+1;
+            }
         }
       
         plan = extractPlan(s,problem);
     
         return plan;
     }
+    //On utilise des AbstractSTateHeuristic pour avoir accès a getACtions
     
     private Node MonteCarloRandomWalk(Node s,ADLProblem problem){
         double hmin = Double.POSITIVE_INFINITY;
@@ -224,6 +245,9 @@ public class ASP extends AbstractPlanner<ADLProblem> {
         Action a;
         Random rand = new Random();
         //NUMBER OF RANDOM WALKS
+        double hold = 0;
+        double progress =0;
+        double acceptable_progress=0;
         for(int i=0;i<NUM_WALK;i++){
             sprime = new Node(s,s.getParent(),s.getAction(),s.getCost(),s.getHeuristic());
             for(int j=0;j<LENGTH_WALK;j++){
@@ -274,6 +298,19 @@ public class ASP extends AbstractPlanner<ADLProblem> {
                 smin=sprime;
                 hmin=sprime.getHeuristic();
             }
+            //P (n) = max(0, holdmin − hmin)
+            //AP(1) = P(1)
+            if(i==0){
+                progress = 1.0;
+                acceptable_progress = progress;
+            }else{
+                progress = Math.max(0,hold - hmin);
+                acceptable_progress = (1-alpha)*acceptable_progress+alpha*progress;
+            }
+            if(acceptable_progress < 0){
+                return smin;
+            }
+
         }
         if(smin == null){
             return s;
